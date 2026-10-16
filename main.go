@@ -13,7 +13,7 @@ import (
 )
 
 func main() {
-	endpoints, err := config.LoadEndpoints("./config/endpoints.json")
+	endpoints, err := config.LoadEndpoints("./assets/endpoints.json")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -36,4 +36,7 @@ func main() {
 	}
 	
 	report.Display(res)
+	if err := report.Save(res, "./assets/reports"); err != nil {
+		log.Println(err)
+	}
 }
