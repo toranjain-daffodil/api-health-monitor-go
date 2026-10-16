@@ -5,6 +5,7 @@ import (
 	"api-health-monitor/internal/config"
 	"api-health-monitor/internal/model"
 	"api-health-monitor/internal/monitor"
+	"api-health-monitor/internal/report"
 	"context"
 	"log"
 	"net/http"
@@ -34,22 +35,5 @@ func main() {
 		log.Fatal(err)
 	}
 	
-	for _, r:= range res.Results {
-		log.Println("=================================")
-		log.Println("ID:", r.EndpointID)
-		log.Println("URL:", r.URL)
-		log.Println("Status:", r.Status)
-		log.Println("Status Code:", r.HTTPStatusCode)
-		log.Println("Last Attempt Duration:", r.LastAttemptDuration)
-		log.Println("Total Elapsed Time:", r.TotalElapsed)
-		log.Println("Error:", r.Error)
-		log.Println("=================================")
-	}
-	log.Println("=================================")
-	log.Println("RESULTS")
-	log.Println("Success Count:", res.SuccessCount)
-	log.Println("Cancellation Count:", res.CancelledCount)
-	log.Println("Failure Count", res.FailureCount)
-	log.Println("Total Run Duration:", res.TotalRunDuration)
-	log.Println("=================================")
+	report.Display(res)
 }
